@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>First Try Friday - Stuck on a Trick</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo">FIRST TRY FRIDAY</div>
+      <div class="tagline">Land it or bail it. No second chances.</div>
+    </div>
+
+    <div class="main-content">
+      <div id="waitContent" class="wait-content">
+        <h2>Stuck on a trick? Ask for help!</h2>
+        <textarea id="trick-question" placeholder="Describe the trick or problem..."></textarea>
+        <button class="nav-btn" id="ask-btn">Ask AI</button>
+        <div id="ai-response"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    async function callAIAPI(question) {
+      const response = await fetch('/ask', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ question }),
+      });
+      const data = await response.json();
+      return data.answer;
+    }
+
+    document.getElementById('ask-btn').addEventListener('click', async () => {
+      const question = document.getElementById('trick-question').value.trim();
+      if (!question) return alert("Please enter a question.");
+
+      const responseDiv = document.getElementById('ai-response');
+      responseDiv.textContent = "Thinking...";
+
+      try {
+        const aiResponse = await callAIAPI(question);
+        responseDiv.textContent = aiResponse;
+      } catch (err) {
+        responseDiv.textContent = "Oops, something went wrong.";
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First Try Friday</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            flex-grow: 1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 3em;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            font-size: 1.2em;
+            color: #ccc;
+            font-style: italic;
+        }
+
+        .main-content {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .day-indicator {
+            text-align: center;
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+        }
+
+        .friday-content {
+            text-align: center;
+        }
+
+        .trick-card {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+        }
+
+        .trick-title {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .trick-description {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .upload-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            border: 2px dashed #ff6b35;
+        }
+
+        .file-input {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 1em;
+            margin-bottom: 15px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            color: white;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4);
+        }
+
+        .wait-content {
+            text-align: center;
+        }
+
+        .countdown {
+            font-size: 3em;
+            font-weight: bold;
+            color: #ff6b35;
+            margin: 20px 0;
+        }
+
+        .previous-tricks {
+            margin-top: 40px;
+        }
+
+        .previous-tricks h3 {
+            color: #ff6b35;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .trick-history {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .history-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .history-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .history-date {
+            color: #ff6b35;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+
+        .history-trick {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .video-links {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .video-links h3 {
+            color: #ff6b35;
+            margin-bottom: 15px;
+        }
+
+        .video-link {
+            display: inline-block;
+            background: rgba(255, 107, 53, 0.2);
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            color: #ff6b35;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .video-link:hover {
+            background: rgba(255, 107, 53, 0.4);
+        }
+
+        .submissions {
+            margin-top: 40px;
+        }
+
+        .submission-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 4px solid #ff6b35;
+        }
+
+        .about-section {
+            margin-top: 40px;
+        }
+
+        .about-content {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .about-content h2 {
+            color: #ff6b35;
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 30px;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .about-content h3 {
+            color: #ff6b35;
+            font-size: 1.4em;
+            margin: 30px 0 15px 0;
+            border-bottom: 2px solid rgba(255, 107, 53, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .about-content p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #e0e0e0;
+        }
+
+        .about-content strong {
+            color: #ff6b35;
+        }
+
+        .about-content em {
+            color: #ccc;
+            font-style: italic;
+        }
+
+        .origin-story, .concept-section, .impact-section, .tribute-section {
+            margin-bottom: 25px;
+        }
+
+        .disclaimer {
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255, 107, 53, 0.1);
+            border-left: 4px solid #ff6b35;
+            border-radius: 5px;
+        }
+
+        .disclaimer p {
+            margin: 0;
+            font-size: 0.9em;
+            color: #ccc;
+        }
+
+        .classic-videos {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .nav-buttons {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .nav-btn {
+            background: rgba(255, 107, 53, 0.2);
+            border: 1px solid #ff6b35;
+            color: #ff6b35;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1em;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 107, 53, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+            
+            .logo {
+                font-size: 2em;
+            }
+            
+            .trick-title {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">FIRST TRY FRIDAY</div>
+            <div class="tagline">Land it or bail it. No second chances.</div>
+            
+            <div class="nav-buttons">
+                <button class="nav-btn active" id="homeBtn" onclick="showHome()">Home</button>
+                <button class="nav-btn" id="aboutBtn" onclick="showAbout()">About</button>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="day-indicator" id="dayIndicator"></div>
+            
+            <div id="fridayContent" class="friday-content" style="display: none;">
+                <div class="trick-card">
+                    <div class="trick-title" id="trickName">Kickflip</div>
+                    <div class="trick-description" id="trickDescription">Classic flip trick - pop, flick, catch, roll away</div>
+                </div>
+                
+                <div class="upload-section">
+                    <h3>Submit Your Attempt</h3>
+                    <p>Upload your first try video - landed or not!</p>
+                    <input type="file" class="file-input" id="videoUpload" accept="video/*">
+                    <input type="text" class="file-input" placeholder="Your name (optional)" id="userName">
+                    <button class="submit-btn" onclick="submitVideo()">Submit First Try</button>
+                </div>
+            </div>
+            
+            <div id="waitContent" class="wait-content">
+                <h2>Come back on Friday for this week's challenge!</h2>
+                <div class="countdown" id="countdown"></div>
+                
+                <div class="video-links">
+                    <h3>Watch Classic FTF Videos</h3>
+                    <a href="https://www.youtube.com/watch?v=bIReV7FwMeY" target="_blank" class="video-link">Mike Mo Capaldi</a>
+                    <a href="https://www.youtube.com/watch?v=b-1E90aWYVA" target="_blank" class="video-link">Louie Lopez</a>
+                    <a href="https://www.youtube.com/watch?v=2hjTyf5xQI0" target="_blank" class="video-link">P-Rod!</a>
+                    <a href="https://www.youtube.com/watch?v=trOodcvIN1U" target="_blank" class="video-link">Sean Malto</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="previous-tricks">
+            <h3>Previous Friday Tricks</h3>
+            <div class="trick-history" id="trickHistory"></div>
+        </div>
+
+        <div class="submissions" id="submissions" style="display: none;">
+            <h3>Today's Submissions</h3>
+            <div id="submissionsList"></div>
+        </div>
+
+        <div class="about-section" id="aboutSection" style="display: none;">
+            <div class="about-content">
+                <h2>About First Try Friday</h2>
+                
+                <div class="origin-story">
+                    <h3>🏢 The Origin</h3>
+                    <p>First Try Friday was created by <strong>The Berrics</strong>, the legendary private skatepark and media company founded by professional skateboarders <strong>Steve Berra</strong> and <strong>Eric Koston</strong> in 2007. Located in Los Angeles, The Berrics became the epicenter of modern skateboarding culture and digital skate media.</p>
+                </div>
+
+                <div class="concept-section">
+                    <h3>🎯 The Concept</h3>
+                    <p>The original First Try Friday format was beautifully simple and brutally challenging: a professional skateboarder would be called out to perform a specific trick, but they only got <em>one attempt</em>. No warm-ups, no practice runs, no second chances. Land it or bail it - all captured on camera for the world to see.</p>
+                    
+                    <p>This format stripped away all the usual safety nets that skaters have when filming. No endless attempts, no editing out the slams - just raw, first-attempt skateboarding that showcased both incredible skill and the mental pressure that comes with performing on command.</p>
+                </div>
+
+                <div class="impact-section">
+                    <h3>🌟 Cultural Impact</h3>
+                    <p>First Try Friday became an iconic series that influenced skateboarding culture far beyond The Berrics' walls. It pushed the boundaries of what we expected from professional skateboarders and created legendary moments that the skate community still talks about today.</p>
+                    
+                    <p>The format demonstrated that sometimes the most compelling skateboarding content comes not from perfect, polished video parts, but from authentic, high-pressure moments where anything can happen.</p>
+                </div>
+
+                <div class="tribute-section">
+                    <h3>🙏 Our Tribute</h3>
+                    <p>This web app is our tribute to that amazing concept, bringing the FTF challenge to skaters everywhere - from beginners working on their first ollie to pros pushing their limits on gnarly spots.</p>
+                    
+                    <p><strong>Mad respect to The Berrics, Steve Berra, and Eric Koston</strong> for creating something that pushed skate culture forward and inspired countless skaters worldwide to step up their game. Their innovation in both skateboarding and digital media paved the way for how we consume and participate in skate culture today.</p>
+                </div>
+
+                <div class="disclaimer">
+                    <p><em>This is a fan-made tribute application and is not officially affiliated with The Berrics. All credit for the original First Try Friday concept goes to The Berrics and their crew.</em></p>
+                </div>
+
+                <div class="classic-videos">
+                    <h3>🎥 Watch the Classics</h3>
+                    <p>Check out some legendary First Try Friday moments from The Berrics:</p>
+                    <div class="video-links">
+                        <a href="https://theberrics.com" class="video-link" target="_blank">Visit The Berrics</a>
+                        <a href="#" class="video-link">Classic FTF Compilation</a>
+                        <a href="#" class="video-link">Best FTF Fails</a>
+                        <a href="#" class="video-link">Most Legendary Moments</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample trick database
+        const tricks = [
+            { name: "Kickflip", description: "Classic flip trick - pop, flick, catch, roll away" },
+            { name: "Heelflip", description: "Flip with your heel - opposite of kickflip" },
+            { name: "Tre Flip", description: "360 flip - kickflip with a 360 shuvit" },
+            { name: "Hardflip", description: "Frontside pop shuvit with a kickflip" },
+            { name: "Varial Flip", description: "Backside pop shuvit with a kickflip" },
+            { name: "Inward Heelflip", description: "Backside pop shuvit with a heelflip" },
+            { name: "Laser Flip", description: "360 frontside pop shuvit with a heelflip" },
+            { name: "Impossible", description: "Board wraps around your back foot" },
+            { name: "360 Flip", description: "Board does a full 360 while flipping" },
+            { name: "Casper Flip", description: "Half kickflip to casper, then flip out" }
+        ];
+
+        // Previous tricks data
+        const previousTricks = [
+            { date: "Dec 29, 2024", trick: "Tre Flip", submissions: 15 },
+            { date: "Dec 22, 2024", trick: "Hardflip", submissions: 12 },
+            { date: "Dec 15, 2024", trick: "Varial Flip", submissions: 18 },
+            { date: "Dec 8, 2024", trick: "Heelflip", submissions: 22 },
+            { date: "Dec 1, 2024", trick: "Impossible", submissions: 8 }
+        ];
+
+        // Current submissions (in memory only)
+        let currentSubmissions = [];
+
+        function isFriday() {
+            return new Date().getDay() === 5;
+        }
+
+        function getDaysUntilFriday() {
+            const today = new Date().getDay();
+            if (today === 5) return 0;
+            return today < 5 ? 5 - today : 7 - today + 5;
+        }
+
+        function getTodaysTrick() {
+            // Use current date as seed for consistent daily trick
+            const today = new Date();
+            const dateString = today.toDateString();
+            let hash = 0;
+            for (let i = 0; i < dateString.length; i++) {
+                const char = dateString.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash;
+            }
+            return tricks[Math.abs(hash) % tricks.length];
+        }
+
+        function updateDisplay() {
+            const dayIndicator = document.getElementById('dayIndicator');
+            const fridayContent = document.getElementById('fridayContent');
+            const waitContent = document.getElementById('waitContent');
+            const submissions = document.getElementById('submissions');
+            
+            if (isFriday()) {
+                const todaysTrick = getTodaysTrick();
+                
+                dayIndicator.innerHTML = '🛹 IT\'S FRIDAY! 🛹';
+                dayIndicator.style.background = 'linear-gradient(45deg, #ff6b35, #f7931e)';
+                
+                document.getElementById('trickName').textContent = todaysTrick.name;
+                document.getElementById('trickDescription').textContent = todaysTrick.description;
+                
+                fridayContent.style.display = 'block';
+                waitContent.style.display = 'none';
+                submissions.style.display = 'block';
+            } else {
+                const daysUntil = getDaysUntilFriday();
+                dayIndicator.innerHTML = `${daysUntil} day${daysUntil === 1 ? '' : 's'} until Friday`;
+                
+                fridayContent.style.display = 'none';
+                waitContent.style.display = 'block';
+                submissions.style.display = 'none';
+                
+                updateCountdown();
+            }
+        }
+
+        function updateCountdown() {
+            const now = new Date();
+            const nextFriday = new Date();
+            const daysUntil = getDaysUntilFriday();
+            
+            nextFriday.setDate(now.getDate() + daysUntil);
+            nextFriday.setHours(0, 0, 0, 0);
+            
+            const timeUntil = nextFriday - now;
+            const days = Math.floor(timeUntil / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeUntil % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeUntil % (1000 * 60 * 60)) / (1000 * 60));
+            
+            document.getElementById('countdown').textContent = 
+                `${days}d ${hours}h ${minutes}m`;
+        }
+
+        function populateTrickHistory() {
+            const historyContainer = document.getElementById('trickHistory');
+            historyContainer.innerHTML = '';
+            
+            previousTricks.forEach(trick => {
+                const card = document.createElement('div');
+                card.className = 'history-card';
+                card.innerHTML = `
+                    <div class="history-date">${trick.date}</div>
+                    <div class="history-trick">${trick.trick}</div>
+                    <div>${trick.submissions} submissions</div>
+                `;
+                historyContainer.appendChild(card);
+            });
+        }
+
+        function submitVideo() {
+            const fileInput = document.getElementById('videoUpload');
+            const userName = document.getElementById('userName').value || 'Anonymous';
+            
+            if (!fileInput.files[0]) {
+                alert('Please select a video file first!');
+                return;
+            }
+            
+            // Simulate submission
+            const submission = {
+                name: userName,
+                fileName: fileInput.files[0].name,
+                time: new Date().toLocaleTimeString()
+            };
+            
+            currentSubmissions.push(submission);
+            displaySubmissions();
+            
+            // Clear form
+            fileInput.value = '';
+            document.getElementById('userName').value = '';
+            
+            alert('Video submitted! Thanks for the first try attempt! 🛹');
+        }
+
+        function displaySubmissions() {
+            const submissionsList = document.getElementById('submissionsList');
+            submissionsList.innerHTML = '';
+            
+            currentSubmissions.forEach(submission => {
+                const item = document.createElement('div');
+                item.className = 'submission-item';
+                item.innerHTML = `
+                    <strong>${submission.name}</strong> submitted at ${submission.time}
+                    <br><small>File: ${submission.fileName}</small>
+                `;
+                submissionsList.appendChild(item);
+            });
+        }
+
+        // Initialize app
+        updateDisplay();
+        populateTrickHistory();
+        
+        // Update countdown every minute
+        setInterval(() => {
+            if (!isFriday()) {
+                updateCountdown();
+            }
+        }, 60000);
+
+        // Check for day change every hour
+        setInterval(updateDisplay, 3600000);
+
+        // Navigation functions
+        function showHome() {
+            document.getElementById('dayIndicator').parentElement.style.display = 'block';
+            document.getElementById('fridayContent').style.display = isFriday() ? 'block' : 'none';
+            document.getElementById('waitContent').style.display = isFriday() ? 'none' : 'block';
+            document.getElementById('submissions').style.display = isFriday() ? 'block' : 'none';
+            document.querySelector('.previous-tricks').style.display = 'block';
+            document.getElementById('aboutSection').style.display = 'none';
+            
+            document.getElementById('homeBtn').classList.add('active');
+            document.getElementById('aboutBtn').classList.remove('active');
+        }
+
+        function showAbout() {
+            document.getElementById('dayIndicator').parentElement.style.display = 'none';
+            document.getElementById('fridayContent').style.display = 'none';
+            document.getElementById('waitContent').style.display = 'none';
+            document.getElementById('submissions').style.display = 'none';
+            document.querySelector('.previous-tricks').style.display = 'none';
+            document.getElementById('aboutSection').style.display = 'block';
+            
+            document.getElementById('homeBtn').classList.remove('active');
+            document.getElementById('aboutBtn').classList.add('active');
+        }
+    </script>
+</body>
+</html>
