@@ -321,3 +321,36 @@ body {
         font-size: 2em;
     }
 }
+
+#trick-question {
+  width: 100%;
+  min-height: 100px;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  resize: vertical;
+  box-sizing: border-box;
+  margin-bottom: 16px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #222;       /* Dark background */
+  color: #f0e68c;              /* Light yellow text */
+  caret-color: #ffcc33;        /* Cursor color matching the gradient */
+  margin-top: 12px;
+}
+
+#ask-btn {
+  background: linear-gradient(90deg, #ff7f00, #ffdb4d);  /* orange to yellow gradient */
+  color: #222;
+  padding: 12px 28px;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
+  font-weight: 600;
+}
+
+#ask-btn:hover {
+  background: linear-gradient(90deg, #ffdb4d, #ff7f00); /* reverse gradient on hover */
+  color: #111;
+}

@@ -20,11 +20,21 @@ const openai = new OpenAI({
 // Route for AI questions
 app.post('/ask', async (req, res) => {
   const question = req.body.question;
+  const prompt = `
+Explain how to perform this trick in 4-5 concise bullet points:
+
+"${question}"
+  `;
   try {
     const completion = await openai.chat.completions.create({
-      model: 'gpt-3.5-turbo',
-      messages: [{ role: 'user', content: question }],
-    });
+  model: 'gpt-3.5-turbo',
+  messages: [
+  { role: 'system', content: 'Respond with a numbered markdown list limited to 4-5 points.' },
+  { role: 'user', content: question }
+],
+
+});
+
     res.json({ answer: completion.choices[0].message.content });
   } catch (err) {
     console.error('OpenAI error:', err.message);
