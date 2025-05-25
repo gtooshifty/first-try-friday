@@ -1,4 +1,5 @@
 require('dotenv').config();
+console.log('OPENAI_API_KEY:', process.env.OPENAI_API_KEY ? 'loaded' : 'missing');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -37,9 +38,9 @@ Explain how to perform this trick in 4-5 concise bullet points:
 
     res.json({ answer: completion.choices[0].message.content });
   } catch (err) {
-    console.error('OpenAI error:', err.message);
-    res.status(500).json({ answer: "Something went wrong." });
-  }
+  console.error('OpenAI error:', err);
+  res.status(500).json({ answer: "Oops, something went wrong." });
+}
 });
 
 app.listen(PORT, () => {
