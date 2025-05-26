@@ -338,19 +338,3 @@ body {
   margin-top: 12px;
 }
 
-#ask-btn {
-  background: linear-gradient(90deg, #ff7f00, #ffdb4d);  /* orange to yellow gradient */
-  color: #222;
-  padding: 12px 28px;
-  font-size: 18px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.3s ease, color 0.3s ease;
-  font-weight: 600;
-}
-
-#ask-btn:hover {
-  background: linear-gradient(90deg, #ffdb4d, #ff7f00); /* reverse gradient on hover */
-  color: #111;
-}
