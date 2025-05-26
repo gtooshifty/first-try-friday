@@ -1,127 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>First Try Friday</title>
-    <link rel="stylesheet" href="styles.css" />
-    <script src="main.js" defer></script>
- 
-</head>
-<body>
-    <div class="container">
-        <div class="header">
-            <div class="logo">FIRST TRY FRIDAY</div>
-            <div class="tagline">Land it or bail it. No second chances.</div>
-            
-            <div class="nav-buttons">
-                <button class="nav-btn active" id="homeBtn" onclick="showHome()">Home</button>
-                <button class="nav-btn" id="aboutBtn" onclick="showAbout()">About</button>
-                <button class="nav-btn" onclick="window.location.href='stuck.html'">Stuck on a trick?</button>
-            </div>
-        </div>
-
-        <div class="main-content">
-            <div class="day-indicator" id="dayIndicator"></div>
-            
-            <div id="fridayContent" class="friday-content" style="display: none;">
-                <div class="trick-card">
-                    <div class="trick-title" id="trickName">Kickflip</div>
-                    <div class="trick-description" id="trickDescription">Classic flip trick - pop, flick, catch, roll away</div>
-                </div>
-                
-                <div class="upload-section">
-                    <h3>Submit Your Attempt</h3>
-                    <p>Upload your first try video - landed or not!</p>
-                    <input type="file" class="file-input" id="videoUpload" accept="video/*">
-                    <input type="text" class="file-input" placeholder="Your name (optional)" id="userName">
-                    <button class="submit-btn" onclick="submitVideo()">Submit First Try</button>
-                </div>
-            </div>
-            
-            <div id="waitContent" class="wait-content">
-                <h2>Come back on Friday for this week's challenge!</h2>
-                <div class="countdown" id="countdown"></div>
-                
-<div class="video-links">
-  <h3>Watch Classic FTF Videos</h3>
-  <button class="video-link" onclick="playVideo('bIReV7FwMeY')">Mike Mo Capaldi</button>
-
-  <button class="video-link" onclick="playVideo('2hjTyf5xQI0')">P-Rod!</button>
-  <button class="video-link" onclick="playVideo('trOodcvIN1U')">Sean Malto</button>
-</div>
-<div id="video-container" style="display: none;">
-  <iframe
-    id="youtube-player"
-    width="560"
-    height="315"
-    frameborder="0"
-    allowfullscreen>
-  </iframe>
-</div>
-            </div>
-        </div>
+  function playVideo(videoId) {
+    const iframe = document.getElementById('youtube-player');
+    iframe.src = `https://www.youtube.com/embed/${videoId}`;
+    document.getElementById('video-container').style.display = 'block';
+}
 
 
-        <div class="previous-tricks">
-            <h3>Previous Friday Tricks</h3>
-            <div class="trick-history" id="trickHistory"></div>
-        </div>
-
-        <div class="submissions" id="submissions" style="display: none;">
-            <h3>Today's Submissions</h3>
-            <div id="submissionsList"></div>
-        </div>
-
-        <div class="about-section" id="aboutSection" style="display: none;">
-            <div class="about-content">
-                <h2>About First Try Friday</h2>
-                
-                <div class="origin-story">
-                    <h3>🏢 The Origin</h3>
-                    <p>First Try Friday was created by <strong>The Berrics</strong>, the legendary private skatepark and media company founded by professional skateboarders <strong>Steve Berra</strong> and <strong>Eric Koston</strong> in 2007. Located in Los Angeles, The Berrics became the epicenter of modern skateboarding culture and digital skate media.</p>
-                </div>
-
-                <div class="concept-section">
-                    <h3>🎯 The Concept</h3>
-                    <p>The original First Try Friday format was beautifully simple and brutally challenging: a professional skateboarder would be called out to perform a specific trick, but they only got <em>one attempt</em>. No warm-ups, no practice runs, no second chances. Land it or bail it - all captured on camera for the world to see.</p>
-                    
-                    <p>This format stripped away all the usual safety nets that skaters have when filming. No endless attempts, no editing out the slams - just raw, first-attempt skateboarding that showcased both incredible skill and the mental pressure that comes with performing on command.</p>
-                </div>
-
-                <div class="impact-section">
-                    <h3>🌟 Cultural Impact</h3>
-                    <p>First Try Friday became an iconic series that influenced skateboarding culture far beyond The Berrics' walls. It pushed the boundaries of what we expected from professional skateboarders and created legendary moments that the skate community still talks about today.</p>
-                    
-                    <p>The format demonstrated that sometimes the most compelling skateboarding content comes not from perfect, polished video parts, but from authentic, high-pressure moments where anything can happen.</p>
-                </div>
-
-                <div class="tribute-section">
-                    <h3>🙏 Our Tribute</h3>
-                    <p>This web app is our tribute to that amazing concept, bringing the FTF challenge to skaters everywhere - from beginners working on their first ollie to pros pushing their limits on gnarly spots.</p>
-                    
-                    <p><strong>Mad respect to The Berrics, Steve Berra, and Eric Koston</strong> for creating something that pushed skate culture forward and inspired countless skaters worldwide to step up their game. Their innovation in both skateboarding and digital media paved the way for how we consume and participate in skate culture today.</p>
-                </div>
-
-                <div class="disclaimer">
-                    <p><em>This is a fan-made tribute application and is not officially affiliated with The Berrics. All credit for the original First Try Friday concept goes to The Berrics and their crew.</em></p>
-                </div>
-
-                <div class="classic-videos">
-                    <h3>🎥 Watch the Classics</h3>
-                    <p>Check out some legendary First Try Friday moments from The Berrics:</p>
-                    <div class="video-links">
-                        <a href="https://theberrics.com" class="video-link" target="_blank">Visit The Berrics</a>
-                        <a href="#" class="video-link">Classic FTF Compilation</a>
-                        <a href="#" class="video-link">Best FTF Fails</a>
-                        <a href="#" class="video-link">Most Legendary Moments</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
         // Sample trick database
         const tricks = [
             { name: "Kickflip", description: "Classic flip trick - pop, flick, catch, roll away" },
@@ -314,14 +197,14 @@
             document.getElementById('aboutBtn').classList.add('active');
         }
 
-        function playVideo(videoId) {
-    const iframe = document.getElementById('youtube-player');
-    const container = document.getElementById('video-container');
-
-    iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-    container.style.display = 'block';
-}
-
-    </script>
-</body>
-</html>
+        function show() {
+            document.getElementById('dayIndicator').parentElement.style.display = 'none';
+            document.getElementById('fridayContent').style.display = 'none';
+            document.getElementById('waitContent').style.display = 'none';
+            document.getElementById('submissions').style.display = 'none';
+            document.querySelector('.previous-tricks').style.display = 'none';
+            document.getElementById('aboutSection').style.display = 'block';
+            
+            document.getElementById('homeBtn').classList.remove('active');
+            document.getElementById('aboutBtn').classList.add('active');
+        }
